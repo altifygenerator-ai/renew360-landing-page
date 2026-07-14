@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import QuoteForm from './components/QuoteForm';
 
 const phoneDisplay = '501-617-3936';
 const phoneHref = 'tel:+15016173936';
@@ -12,7 +13,7 @@ const services = [
   {
     number: '02',
     title: 'Offices',
-    text: 'Dependable office cleaning for a cleaner workspace and a better first impression.'
+    text: 'Dependable office and commercial cleaning for a cleaner workspace and a better first impression.'
   },
   {
     number: '03',
@@ -36,17 +37,37 @@ const additionalServices = [
   'General cleanups'
 ];
 
+const results = [
+  { src: '/images/before-after-porch.jpg', alt: 'Before and after porch cleanup', label: 'Porch cleanup' },
+  { src: '/images/before-after-bathroom.jpg', alt: 'Before and after bathroom deep cleaning', label: 'Bathroom deep clean' },
+  { src: '/images/before-after-kitchen.jpg', alt: 'Before and after kitchen cleaning', label: 'Kitchen reset' },
+  { src: '/images/before-after-yard.jpg', alt: 'Before and after yard cleanup', label: 'Yard cleanup' },
+  { src: '/images/before-after-lawn.jpg', alt: 'Before and after lawn cleanup', label: 'Outdoor cleanup' },
+  { src: '/images/before-after-room.jpg', alt: 'Before and after empty room cleaning', label: 'Move-out room clean' }
+];
+
+const promoImages = [
+  { src: '/images/services-trailer-wide.jpg', alt: 'Renew 360 cleaning and hauling services', className: 'wide' },
+  { src: '/images/openings-available-square.jpg', alt: 'Renew 360 openings available for cleaning services', className: 'square' },
+  { src: '/images/service-flyer-faith.jpg', alt: 'Renew 360 residential commercial and construction cleaning services', className: 'tall' },
+  { src: '/images/openings-available-vertical.jpg', alt: 'Renew 360 cleaning openings and service information', className: 'tall' },
+  { src: '/images/openings-licensed-bonded.jpg', alt: 'Renew 360 licensed and bonded cleaning services', className: 'tall' },
+  { src: '/images/services-clean-with-purpose.jpg', alt: 'Renew 360 detailed cleaning and cleanout services', className: 'tall' }
+];
+
 export default function Home() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': ['LocalBusiness', 'HouseCleaningService'],
     name: 'Renew 360 Cleaning Company LLC',
     telephone: '+1-501-617-3936',
+    email: 'renew360cleaning@gmail.com',
     slogan: 'Renewing your space. Restoring peace.',
     description:
       'Residential, commercial and construction cleaning, including deep cleaning, move-in and move-out cleaning, cleanouts and haul-off help.',
-    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/images/renew360-official-flyer.jpg`,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/images/openings-available-square.jpg`,
     founder: { '@type': 'Person', name: 'Rebecca Turner' },
+    areaServed: { '@type': 'City', name: 'Hot Springs, Arkansas' },
     priceRange: '$$',
     serviceType: additionalServices.concat([
       'Residential cleaning',
@@ -101,9 +122,10 @@ export default function Home() {
         <nav className="nav-bar" aria-label="Main navigation">
           <div className="wrap nav-inner">
             <a href="#services">Cleaning services</a>
+            <a href="#results">Before & after</a>
             <a href="#cleanouts">Cleanouts & haul-off</a>
             <a href="#values">What we stand for</a>
-            <a className="nav-call" href={phoneHref}>Licensed & insured · Call today</a>
+            <a className="nav-call" href="#quote">Request a free estimate</a>
           </div>
         </nav>
       </header>
@@ -134,26 +156,25 @@ export default function Home() {
             <p className="faith-line">Faith. Integrity. Excellence. That&apos;s our promise.</p>
           </div>
 
-          <div className="hero-visual">
-            <div className="photo-frame">
+          <div className="hero-visual" id="quote">
+            <div className="hero-photo" aria-hidden="true">
               <Image
-                src="/images/renew360-official-flyer.jpg"
-                alt="Clean home, office and construction spaces"
+                src="/images/cleaning-spaces.jpg"
+                alt=""
                 fill
-                sizes="(max-width: 900px) 100vw, 46vw"
+                sizes="(max-width: 900px) 100vw, 48vw"
                 priority
               />
             </div>
-            <div className="hero-stamp">
+            <div className="hero-photo-shade" aria-hidden="true" />
+            <div className="quote-panel">
+              <QuoteForm />
+            </div>
+            <div className="hero-stamp" aria-hidden="true">
               <span>We clean.</span>
               <strong>You relax.</strong>
               <span>We renew.</span>
               <em>You thrive.</em>
-            </div>
-            <div className="hero-side-note">
-              <span>Residential</span>
-              <span>Commercial</span>
-              <span>Construction</span>
             </div>
           </div>
         </section>
@@ -182,16 +203,45 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="results-section" id="results">
+          <div className="wrap">
+            <div className="results-heading">
+              <div>
+                <p className="section-kicker light">The difference a full clean can make</p>
+                <h2>Real before-and-after results.</h2>
+              </div>
+              <p>From deep cleaning inside to clearing and cleaning up outside, these are the kinds of fresh starts Renew 360 is ready to take on.</p>
+            </div>
+
+            <div className="results-grid">
+              {results.map((result, index) => (
+                <figure key={result.src}>
+                  <div className="result-image">
+                    <Image
+                      src={result.src}
+                      alt={result.alt}
+                      fill
+                      sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw"
+                      priority={index < 2}
+                    />
+                  </div>
+                  <figcaption>{result.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="cleanout-section" id="cleanouts">
-       <div className="cleanout-image">
-  <Image
-    src="/images/trailer-cleanouts.jpg"
-    alt="Renew 360 trailer available for cleanups and haul-off help"
-    fill
-    sizes="(max-width: 900px) 100vw, 44vw"
-    className="cleanout-flyer"
-  />
-</div>
+          <div className="cleanout-image">
+            <Image
+              src="/images/trailer-cleanouts-new.jpg"
+              alt="Renew 360 trailer available for cleanups and haul-off help"
+              fill
+              sizes="(max-width: 900px) 100vw, 44vw"
+              className="cleanout-flyer"
+            />
+          </div>
 
           <div className="cleanout-copy">
             <p className="section-kicker light">When the job is bigger than a regular clean</p>
@@ -209,6 +259,28 @@ export default function Home() {
             <div className="cleanout-contact">
               <p>Pricing depends on the space and the amount that needs to go.</p>
               <a href={phoneHref}>Call for details and availability →</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="promo-section" aria-labelledby="promo-title">
+          <div className="wrap">
+            <div className="promo-heading">
+              <p className="section-kicker">Cleaning, cleanouts and fresh starts</p>
+              <h2 id="promo-title">A closer look at what Renew 360 handles.</h2>
+            </div>
+
+            <div className="promo-grid">
+              {promoImages.map((image) => (
+                <figure className={`promo-card ${image.className}`} key={image.src}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 700px) 92vw, (max-width: 1050px) 46vw, 33vw"
+                  />
+                </figure>
+              ))}
             </div>
           </div>
         </section>
@@ -235,8 +307,8 @@ export default function Home() {
                 <p>It is not just cleaned. The little things are cared for too.</p>
               </article>
               <article>
-                <b>Eco-friendly options</b>
-                <p>Safer options are available for your family, pets and the planet.</p>
+                <b>Equipment provided</b>
+                <p>Renew 360 brings the equipment and supplies needed for the job.</p>
               </article>
             </div>
           </div>
@@ -250,11 +322,14 @@ export default function Home() {
               <p>Tell Rebecca what needs cleaned, cleared or brought back in order.</p>
             </div>
 
-            <a className="big-phone" href={phoneHref}>
-              <small>Call or text</small>
-              <strong>{phoneDisplay}</strong>
-              <span>Rebecca Turner · Licensed & insured</span>
-            </a>
+            <div className="closing-actions">
+              <a className="quote-link" href="#quote">Request an estimate online</a>
+              <a className="big-phone" href={phoneHref}>
+                <small>Call or text</small>
+                <strong>{phoneDisplay}</strong>
+                <span>Rebecca Turner · Licensed, bonded & insured</span>
+              </a>
+            </div>
           </div>
         </section>
       </main>
