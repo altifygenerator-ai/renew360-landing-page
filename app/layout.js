@@ -1,6 +1,6 @@
 import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const siteUrl = 'https://www.renew360cleaning.com';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,9 +22,10 @@ export const metadata = {
     title: 'Renew 360 Cleaning Company LLC',
     description: 'Clean spaces. Renewed lives. Glorifying God in all we do.',
     type: 'website',
+    url: siteUrl,
     images: ['/images/openings-available-square.jpg']
   },
-  alternates: { canonical: '/' },
+  alternates: { canonical: siteUrl },
   robots: { index: true, follow: true }
 };
 

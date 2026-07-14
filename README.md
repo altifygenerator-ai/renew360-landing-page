@@ -23,7 +23,7 @@ The two messages are sent separately, so Renew 360 does not see the Hometown Web
 Create `.env.local` from `.env.example` and add the live values:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-live-domain.com
+NEXT_PUBLIC_SITE_URL=https://www.renew360cleaning.com
 RESEND_API_KEY=re_your_resend_api_key
 RESEND_FROM_EMAIL=Renew 360 Website <quotes@hometownwebservicesar.cc>
 RENEW360_EMAIL=renew360cleaning@gmail.com

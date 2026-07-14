@@ -65,7 +65,8 @@ export default function Home() {
     slogan: 'Renewing your space. Restoring peace.',
     description:
       'Residential, commercial and construction cleaning, including deep cleaning, move-in and move-out cleaning, cleanouts and haul-off help.',
-    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/images/openings-available-square.jpg`,
+    url: 'https://www.renew360cleaning.com',
+    image: 'https://www.renew360cleaning.com/images/openings-available-square.jpg',
     founder: { '@type': 'Person', name: 'Rebecca Turner' },
     areaServed: { '@type': 'City', name: 'Hot Springs, Arkansas' },
     priceRange: '$$',
